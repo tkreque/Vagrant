@@ -4,14 +4,14 @@ Vagrant.configure("2") do |config|
     vb.memory = 512
     vb.cpus = 1
   end
+  config.ssh.forward_agent = true
 
   config.vm.define "tfs" do |tfs|
     tfs.vm.provider "virtualbox" do |vb|
       vb.name = "centos_terraform"
     end
     tfs.vm.hostname = "terraform"
-    tfs.vm.network "public_network", ip: "192.168.12.51", bridge: "enp7s0"
-    tfs.vm.network "private_network", ip: "192.168.56.1"
+    tfs.vm.network "public_network", ip: "192.168.12.51", bridge: "wlp8s0"
 
     tfs.vm.synced_folder "../configs", "/configs"
     tfs.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
