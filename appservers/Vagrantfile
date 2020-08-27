@@ -1,0 +1,100 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 512
+    vb.cpus = 1
+  end
+  config.ssh.forward_agent = true
+
+  config.vm.define "nodejs+pm2" do |node|
+    node.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_nodejs+pm2"
+    end
+    node.vm.hostname = "nodejs"
+    node.vm.network "public_network", ip: "192.168.12.60", bridge: "wlp8s0"
+
+    node.vm.synced_folder "../configs", "/configs"
+    node.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    node.vm.provision "shell", inline: "yum update -y"
+  end
+
+  config.vm.define "php+apache" do |php|
+    php.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_php+apache"
+    end
+    php.vm.hostname = "php"
+    php.vm.network "public_network", ip: "192.168.12.61", bridge: "wlp8s0"
+
+    php.vm.synced_folder "../configs", "/configs"
+    php.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    php.vm.provision "shell", inline: "yum update -y"
+  end
+
+  config.vm.define "wordpress" do |wp|
+    wp.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_wordpress"
+    end
+    wp.vm.hostname = "wordpress"
+    wp.vm.network "public_network", ip: "192.168.12.62", bridge: "wlp8s0"
+
+    wp.vm.synced_folder "../configs", "/configs"
+    wp.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    wp.vm.provision "shell", inline: "yum update -y"
+  end
+
+  config.vm.define "java+wildfly" do |java|
+    java.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_java+wildfly"
+    end
+    java.vm.hostname = "java"
+    java.vm.network "public_network", ip: "192.168.12.63", bridge: "wlp8s0"
+
+    java.vm.synced_folder "../configs", "/configs"
+    java.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    java.vm.provision "shell", inline: "yum update -y"
+  end
+
+  config.vm.define "ruby+pm2" do |ruby|
+    ruby.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_ruby+pm2"
+    end
+    ruby.vm.hostname = "ruby"
+    ruby.vm.network "public_network", ip: "192.168.12.64", bridge: "wlp8s0"
+
+    ruby.vm.synced_folder "../configs", "/configs"
+    ruby.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    ruby.vm.provision "shell", inline: "yum update -y"
+  end
+
+  config.vm.define "python+pm2" do |python|
+    python.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_python+pm2"
+    end
+    python.vm.hostname = "python"
+    python.vm.network "public_network", ip: "192.168.12.65", bridge: "wlp8s0"
+
+    python.vm.synced_folder "../configs", "/configs"
+    python.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    python.vm.provision "shell", inline: "yum update -y"
+  end
+
+  config.vm.define "docker+compose" do |docker|
+    docker.vm.provider "virtualbox" do |vb|
+      vb.name = "centos_docker+compose"
+    end
+    docker.vm.hostname = "doker"
+    docker.vm.network "public_network", ip: "192.168.12.66", bridge: "wlp8s0"
+
+    docker.vm.synced_folder "../configs", "/configs"
+    docker.vm.provision "shell", inline: "cat /configs/mykey.pub >> .ssh/authorized_keys"
+    
+    docker.vm.provision "shell", inline: "yum update -y"
+  end
+
+end
