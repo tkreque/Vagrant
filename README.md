@@ -11,12 +11,12 @@ This Vagrant environment was created as part of my labs with Vangrant + Terrafor
 ## Folder tree
 ```
 .
+├── appservers
+│   └── Vagrantfile
 ├── configs
 │   ├── mykey
 │   └── mykey.pub
 ├── README.md
-├── appservers
-	└── Vagrantfile
 └── terraform
     └── Vagrantfile
 
