@@ -15,7 +15,7 @@ This Vagrant environment was created as part of my labs with Vangrant + Terrafor
 │   ├── mykey
 │   └── mykey.pub
 ├── README.md
-├── servers
+├── appservers
 	└── Vagrantfile
 └── terraform
     └── Vagrantfile
